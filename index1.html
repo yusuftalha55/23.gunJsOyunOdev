@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Yusuf Holding </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untitled</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+<body>
+
+    <body style="background-color:rgb(10, 196, 220);">
+        <div class="layout">
+            
+            <nav>
+                <div class="nav-item">
+                    <a class="nav-header" href="index.html">Komutanlar</a>
+                    <a class="nav-header" href="index1.html">Sıradan Askerler</a>
+                </div>
+                
+            </nav>
+        </div>
+    
+        <div id="root"></div>
+            
+ <div class="layout ">
+  <div class="hero-form d-flex flex-column">
+
+            <label for="hero-name">Karakter Adı</label>
+            <input type="text" name="" value="" id="_name">
+         
+            <label for="hero-class">Karakter Sınıfı</label>
+            <input type="text" value="" name="" id="_class">
+         
+            <label for="hero-power">Karakter gücü</label>
+            <input type="text" value="" name="" id="_power">  
+             
+
+            <button style="width:200px;" onclick="getCharStats()" class="btn btn-primary mt-2">Karakterini Yarat</button>
+  </div>
+ </div>
+
+ <br>
+  <div class="layout"> 
+   <div class="hero-resolt d-flex flex-column">
+     <h3 id="h3">
+       Saldırı Sonuc burada görüntülenir
+
+     </h3>
+
+
+   </div>
+
+
+
+  </div>
+
+
+    <script>
+        class Character {
+   constructor(name, role, power) {
+      this.name = name
+      this.role = role
+      this.power = power
+      this.health = 10000
+
+      // console.log('karakter olusturuldu')
+   }
+
+   tellYourName() {
+      console.log(`benim adım ${this.name}`)
+   }
+}
+
+class Mage extends Character {
+   constructor(name, role, power, magicPower) {
+      super(name, role, power)
+      this.magicPower = magicPower
+   }
+
+   castSpell() {
+      let rand = Math.round(Math.random() * this.power);
+      document.getElementById("h3").innerHTML=rand
+      console.log(`${rand} kadar kılıç hasarı attım`)
+   }
+}
+
+class Warrior extends Character {
+   constructor(name, role, power, battlePower) {
+      super(name, role, power)
+      this.battlePower = battlePower
+   }
+
+   swingSword() {
+      let rand = Math.round(Math.random() * this.power);
+       document.getElementById("h3").innerHTML=rand
+      // document.getElementById("${rand}").innerHTML = " Merhaba JavaScript";
+      console.log(`${rand} kadar ok hasarı attım`)
+
+      // document.getElementById("this.power ").innerHTML="vurus";
+   }
+}
+
+// class Archer extends Character {
+//    constructor(name, role, power, shot) {
+//       super(name, role, power)
+//       this.shot = shot
+//    }
+
+//    shootingarrows() {
+//       let rand = Math.round(Math.random() * this.power);
+//       console.log(`${rand} kadar ok hasarı attım`)
+
+//    }
+
+
+
+
+
+
+
+
+function createCharacter(charname, charclass, charpower) {
+
+   //console.log(charname, charclass, charpower)
+
+   if (charclass === 'piyade') {
+      let mage = new Mage(charname, charclass, charpower)
+      //console.log('büyücü olusturuldu... adı: ' + mage)
+      mage.tellYourName()
+      mage.castSpell()
+   }
+   else if (charclass === 'okcu') {
+      let warrior = new Warrior(charname, charclass, charpower)
+      //console.log('savascı olusturuldu... adı: ' + warrior)
+      warrior.tellYourName()
+      warrior.swingSword()
+   }
+
+   // else (charclass === 'okcu') {
+   //    1
+   //    let archer = new Archer(charname, charclass, charpower)
+   //    //console.log('savascı olusturuldu... adı: ' + warrior)
+   //    archer.tellYourName()
+   //    archer.shootingarrows()
+   // }
+
+   else {
+     console.log('gecersiz giris')
+     document.querySelector('.hero-form').innerHTML += '<span style="color:red; font-size: 20px;" id="error">gecersiz giris</span>'
+     setTimeout(()=> {
+      document.querySelector('#error').innerHTML = ''
+     }, 2000)
+   }
+}
+
+function getCharStats() {
+   let charName = document.getElementById('_name').value
+   let charClass = document.getElementById('_class').value
+   let charPower = document.getElementById('_power').value
+
+   createCharacter(charName, charClass, charPower)
+}
+
+// document.getElementById("h3").innerHTML=${rand}
+
+
+
+    </script>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="app.js"></script>
+</body>
+</html>
