@@ -1,108 +1,118 @@
-class Character {
-   constructor(name, role, power) {
-      this.name = name
-      this.role = role
-      this.power = power
-      this.health = 10000
+const pokemonWriteElement = document.getElementById("pokemon-names");
 
-      // console.log('karakter olusturuldu')
-   }
+class Pokemon {
+  constructor(name) {
+    this.name = name;
+    this.health = 10000;
+  }
 
-   tellYourName() {
-      console.log(`benim adım ${this.name}`)
-   }
+  logName() {
+    console.log(`This pokemon's name is: ${this.name}`);
+  }
+
+  appendNameToHtml(htmlElement) {
+    htmlElement.innerHTML += `<p>${this.name}</p>`;
+  }
 }
 
-class Mage extends Character {
-   constructor(name, role, power, magicPower) {
-      super(name, role, power)
-      this.magicPower = magicPower
-   }
+// function createCharacter(charname, charclass, charpower) {
+//   //console.log(charname, charclass, charpower)
 
-   castSpell() {
-      let rand = Math.round(Math.random() * this.power);
-      document.getElementById("h3").innerHTML=rand
-      console.log(`${rand} kadar büyü hasarı attım`)
-   }
+//   if (charclass === "buyucu") {
+//     let mage = new Mage(charname, charclass, charpower);
+//     //console.log('büyücü olusturuldu... adı: ' + mage)
+//     mage.tellYourName();
+//     mage.castSpell();
+//   } else if (charclass === "savascı") {
+//     let warrior = new Warrior(charname, charclass, charpower);
+//     //console.log('savascı olusturuldu... adı: ' + warrior)
+//     warrior.tellYourName();
+//     warrior.swingSword();
+//   }
+
+// function createCharacter(charname, charclass, charpower) {
+//   //console.log(charname, charclass, charpower)
+
+//   if (charclass === "buyucu") {
+//     let mage = new Mage(charname, charclass, charpower);
+//     //console.log('büyücü olusturuldu... adı: ' + mage)
+//     mage.tellYourName();
+//     mage.castSpell();
+//   } else if (charclass === "savascı") {
+//     let warrior = new Warrior(charname, charclass, charpower);
+//     //console.log('savascı olusturuldu... adı: ' + warrior)
+//     warrior.tellYourName();
+//     warrior.swingSword();
+//   }
+
+//   // else (charclass === 'okcu') {
+//   //    1
+//   //    let archer = new Archer(charname, charclass, charpower)
+//   //    //console.log('savascı olusturuldu... adı: ' + warrior)
+//   //    archer.tellYourName()
+//   //    archer.shootingarrows()
+//   // }
+//   else {
+//     console.log("gecersiz giris");
+//     document.querySelector(".hero-form").innerHTML +=
+//       '<span style="color:red; font-size: 20px;" id="error">gecersiz giris</span>';
+//     setTimeout(() => {
+//       document.querySelector("#error").innerHTML = "";
+//     }, 2000);
+//   }
+// }
+
+// function getCharStats() {
+//   let charName = document.getElementById("_name").value;
+//   let charClass = document.getElementById("_class").value;
+//   let charPower = document.getElementById("_power").value;
+
+//   createCharacter(charName, charClass, charPower);
+// }
+
+async function fetchAllPokemons() {
+  const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=151");
+  const json = await res.json();
+
+  const pokemons = json.results;
+
+  const pokemonClasses = [];
+
+  pokemons.forEach((pokemon) => {
+    pokemonClasses.push(new Pokemon(pokemon.name));
+  });
+
+  const randomPokemon =
+    pokemonClasses[Math.floor(Math.random() * pokemonClasses.length)];
+  randomPokemon.appendNameToHtml(pokemonWriteElement);
 }
 
-class Warrior extends Character {
-   constructor(name, role, power, battlePower) {
-      super(name, role, power)
-      this.battlePower = battlePower
-   }
+fetchAllPokemons();
 
-   swingSword() {
-      let rand = Math.round(Math.random() * this.power);
-       document.getElementById("h3").innerHTML=rand
-      // document.getElementById("${rand}").innerHTML = " Merhaba JavaScript";
-      console.log(`${rand} kadar fiziksel hasar attım`)
+const pokemonpowerWriteElement = document.getElementById("pokemon-power");
 
-      // document.getElementById("this.power ").innerHTML="vurus";
-   }
+class pokemonPower {
+  constructor(power) {
+    this.power = power;
+    this.health = 10000;
+  }
+
+  logName() {
+    console.log(`This pokemon's power is: ${this.power}`);
+  }
+
+  appendNameToHtml(htmlElement) {
+    htmlElement.innerHTML += `<p>${this.power}</p>`;
+  }
+
 }
 
-// class Archer extends Character {
-//    constructor(name, role, power, shot) {
-//       super(name, role, power)
-//       this.shot = shot
-//    }
+let random = Math.floor(Math.random() * 500 + 1);
+const randomPower = ` ${random}`;
+// document.getElementById("pokemon-power").innerHTML = "pokemon power";
+// document.getElementById(pokemonPower);
 
-//    shootingarrows() {
-//       let rand = Math.round(Math.random() * this.power);
-//       console.log(`${rand} kadar ok hasarı attım`)
+console.log(random);
 
-//    }
-
-
-
-
-
-
-
-
-function createCharacter(charname, charclass, charpower) {
-
-   //console.log(charname, charclass, charpower)
-
-   if (charclass === 'buyucu') {
-      let mage = new Mage(charname, charclass, charpower)
-      //console.log('büyücü olusturuldu... adı: ' + mage)
-      mage.tellYourName()
-      mage.castSpell()
-   }
-   else if (charclass === 'savascı') {
-      let warrior = new Warrior(charname, charclass, charpower)
-      //console.log('savascı olusturuldu... adı: ' + warrior)
-      warrior.tellYourName()
-      warrior.swingSword()
-   }
-
-   // else (charclass === 'okcu') {
-   //    1
-   //    let archer = new Archer(charname, charclass, charpower)
-   //    //console.log('savascı olusturuldu... adı: ' + warrior)
-   //    archer.tellYourName()
-   //    archer.shootingarrows()
-   // }
-
-   else {
-     console.log('gecersiz giris')
-     document.querySelector('.hero-form').innerHTML += '<span style="color:red; font-size: 20px;" id="error">gecersiz giris</span>'
-     setTimeout(()=> {
-      document.querySelector('#error').innerHTML = ''
-     }, 2000)
-   }
-}
-
-function getCharStats() {
-   let charName = document.getElementById('_name').value
-   let charClass = document.getElementById('_class').value
-   let charPower = document.getElementById('_power').value
-
-   createCharacter(charName, charClass, charPower)
-}
-
-// document.getElementById("h3").innerHTML=${rand}
-
-
+// 1-Tek bir class oluşturup bütün karakterleri ordan çekmek.
+// 2-
