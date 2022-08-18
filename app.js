@@ -108,7 +108,10 @@ class pokemonPower {
 }
 
 let random = Math.floor(Math.random() * 500 + 1);
+// let random =Math.floor(Math.random()  * health- 500 + 1);
 const randomPower = ` ${random}`;
+document.getElementById('h3').innerHTML = random;
+
 // document.getElementById("pokemon-power").innerHTML = "pokemon power";
 // document.getElementById(pokemonPower);
 
